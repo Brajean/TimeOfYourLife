@@ -8,6 +8,7 @@ function SetClockProps(props) {
   const [blinkColons, setBlinkColons] = useState(clockProps.blinkColons);
   const [presets, setPresets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [titleHeader, setTitleHeader] = useState(clockProps.titleHeader);
 
   useEffect(() => {
     (async () => {
@@ -25,6 +26,7 @@ function SetClockProps(props) {
     props.clockFontSize = document.getElementById("clockFontSize").value;
     props.fontColor = document.getElementById("fontColor").value;
     props.blinkColons = document.getElementById("blinkColons").checked;
+    props.titleHeader = document.getElementById("titleHeader").value;
     return props;
   };
 
@@ -41,6 +43,11 @@ function SetClockProps(props) {
       }
       return option;
     });
+  };
+
+  const setTitleHeaderUI = () => {
+    setTitleHeader(document.getElementById("titleHeader").value);
+    clockProps.titleHeader = document.getElementById("titleHeader").value;
   };
 
   const setFontFamilyUI = () => {
@@ -107,6 +114,17 @@ function SetClockProps(props) {
         <div>
           <div>
             <h2>Settings</h2>
+          </div>
+          <div>
+            <div>Title</div>
+            <div>
+              <input
+                id="titleHeader"
+                value={titleHeader}
+                onChange={setTitleHeaderUI}
+              />
+              <button onClick={setClockProps}>✓</button>
+            </div>
           </div>
           <div>
             <div>Font Family</div>
