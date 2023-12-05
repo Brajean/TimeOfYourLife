@@ -22,6 +22,12 @@ public class ClockController : ControllerBase
         return _presets.ToArray();
     }
 
+    [HttpGet, Route("presets/{id:Guid}")]
+    public ClockPropsDto GetPreset(Guid id)
+    {
+        return _presets.FirstOrDefault(x => x.Uuid.Equals(id));
+    }
+
     [HttpPost("presets")]
     public ClockPropsDto AddPreset([FromBody]ClockPropsDto preset)
     {
