@@ -55,11 +55,15 @@ function SetClockProps(props) {
     setPresets([...presets, newPreset]);
   };
 
-  const fontSizeOptions = (selctedSize) => {
+  const fontSizeOptions = (selectedSize) => {
     return clockProps.availableFontSizes.map((size) => {
-      var option = <option>{size}</option>;
-      if (size === selctedSize) {
-        option = <option selected>{size}</option>;
+      var option = <option value={size} label={size}></option>;
+      if (size === selectedSize) {
+        option = (
+          <option value={size} label={size} selected>
+            {size}
+          </option>
+        );
       }
       return option;
     });
@@ -165,17 +169,31 @@ function SetClockProps(props) {
             <div>
               <div>Title Font Size</div>
               <div>
-                <select id="titleFontSize" onChange={setClockProps}>
-                  {fontSizeOptions(clockProps.titleFontSize)}
-                </select>
+                <input
+                  id="titleFontSize"
+                  type="range"
+                  name="titleFontSize"
+                  list="list1"
+                  onChange={setClockProps}
+                />
+                <datalist id="list1">
+                  {fontSizeOptions(clockProps.availableFontSizes)}
+                </datalist>
               </div>
             </div>
             <div>
               <div>Clock Font Size</div>
               <div>
-                <select id="clockFontSize" onChange={setClockProps}>
-                  {fontSizeOptions(clockProps.clockFontSize)}
-                </select>
+                <input
+                  id="clockFontSize"
+                  type="range"
+                  name="clockFontSize"
+                  list="list2"
+                  onChange={setClockProps}
+                />
+                <datalist id="list2">
+                  {fontSizeOptions(clockProps.availableFontSizes)}
+                </datalist>
               </div>
             </div>
             <div>
