@@ -14,12 +14,14 @@ function SetClockProps(props) {
   const [presets, setPresets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [titleHeader, setTitleHeader] = useState(clockProps.titleHeader);
+  const [selectedPreset, setSelectedPreset] = useState(undefined);
 
   useEffect(() => {
     (async () => {
       const response = await fetch("clock/presets");
       const data = await response.json();
       setPresets(data);
+      setSelectedPreset(data[0]);
       setLoading(false);
     })();
   }, []);
@@ -45,7 +47,7 @@ function SetClockProps(props) {
       !setProps.clockFontColor
     ) {
       window.alert(
-        "Invalid fields! \nPlease check that the fields are not blank or null"
+        "Invalid fields! \n Please check that the fields are not blank or null"
       );
     } else {
       props.setClockProps(setProps);
@@ -73,6 +75,20 @@ function SetClockProps(props) {
         option = (
           <option value={size} label={size} selected>
             {size}
+          </option>
+        );
+      }
+      return option;
+    });
+  };
+
+  const presetsOptions = () => {
+    return presets.map((preset) => {
+      var option = <option value={preset.uuid}>{preset.titleHeader}</option>;
+      if (preset.uuid === selectedPreset.uuid) {
+        option = (
+          <option value={preset.uuid} selected>
+            {preset.titleHeader}
           </option>
         );
       }
@@ -121,7 +137,7 @@ function SetClockProps(props) {
         {presets.map((p, i) => (
           <li>
             Preset {i + 1}:{" "}
-            {`Font: ${p.fontFamily}, Title Color: ${p.titleFontColor}, Title Size: ${p.titleFontSize}, Clock Color: ${p.clockFontColor}, Clock Size: ${p.clockFontSize}`}
+            {`Title: ${p.titleHeader}, Font: ${p.fontFamily},  Title Color: ${p.titleFontColor}, Title Size: ${p.titleFontSize}, Clock Color: ${p.clockFontColor}, Clock Size: ${p.clockFontSize}`}
           </li>
         ))}
       </ul>
@@ -156,6 +172,29 @@ function SetClockProps(props) {
             <hr />
           </div>
           <div>
+            <div>Select a preset</div>
+            <div>
+              <select
+                id="presetsList"
+                onChange={(e) => {
+                  const newPreset = presets.find(
+                    (preset) => preset.uuid === e.target.value
+                  );
+                  setSelectedPreset(newPreset);
+                  props.setClockProps(newPreset);
+                  setFontFamily(newPreset.fontFamily);
+                  setTitleFontColor(newPreset.titleFontColor);
+                  setClockFontColor(newPreset.clockColorTitle);
+                  setBlinkColons(newPreset.blinkColons);
+                  setTitleHeader(newPreset.titleHeader);
+                }}
+              >
+                {presetsOptions()}
+              </select>
+            </div>
+            <hr />
+          </div>
+          <div>
             <div>
               <h2>Settings</h2>
             </div>
@@ -178,6 +217,7 @@ function SetClockProps(props) {
                   id="fontFamily"
                   value={fontFamily}
                   onChange={setFontFamilyUI}
+                  onKeyDown={handleKeyEnter}
                 />
                 <button onClick={setClockProps}>✓</button>
               </div>
@@ -219,6 +259,7 @@ function SetClockProps(props) {
                   id="titleFontColor"
                   value={titleFontColor}
                   onChange={(e) => setTitleFontColorUI(e)}
+                  onKeyDown={handleKeyEnter}
                 />
                 <button onClick={setClockProps}>✓</button>
               </div>
@@ -230,6 +271,7 @@ function SetClockProps(props) {
                   id="clockFontColor"
                   value={clockFontColor}
                   onChange={(e) => setClockFontColorUI(e)}
+                  onKeyDown={handleKeyEnter}
                 />
                 <button onClick={setClockProps}>✓</button>
               </div>
