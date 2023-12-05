@@ -4,6 +4,8 @@ public class ClockPropsDto
 {
   public Guid Uuid { get; set; } = Guid.NewGuid();
 
+  public string TitleHeader { get; set; } = "The Time of Your Life";
+
   public string FontFamily {get; set;} = "courier";
   
   public int[] AvailableFontSizes {get; }  = new[] { 12, 24, 48, 64 };
@@ -17,6 +19,4 @@ public class ClockPropsDto
   public string TitleFontColor {get; set;} = "black";
 
   public string ClockFontColor {get; set;} = "black";
-  
-  public string TitleHeader { get; set; } = "The Time of Your Life";
 }
