@@ -1,37 +1,36 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 function Clock(props) {
-  const [date, setDate] = useState(new Date())
-
+  const [date, setDate] = useState(new Date());
 
   function refreshClock() {
-    setDate(new Date())
+    setDate(new Date());
   }
 
   useEffect(() => {
-    const timerId = setInterval(refreshClock, 1000)
+    const timerId = setInterval(refreshClock, 1000);
     return function cleanup() {
-      clearInterval(timerId)
-    }
-  }, [])
+      clearInterval(timerId);
+    };
+  }, []);
 
-  let displayText = date.toLocaleTimeString()
+  let displayText = date.toLocaleTimeString();
   if (props.clockProps.blinkColons & (date.getSeconds() % 2 === 0)) {
-    displayText = displayText.replace(/:/g, ' ')
+    displayText = displayText.replace(/:/g, " ");
   }
 
   let displayStyle = {
     fontFamily: props.clockProps.fontFamily,
     color: props.clockProps.fontColor,
-  }
+  };
 
   let titleStyle = {
     fontSize: `${props.clockProps.titleFontSize}pt`,
-  }
+  };
 
   let clockStyle = {
     fontSize: `${props.clockProps.clockFontSize}pt`,
-  }
+  };
 
   return (
     <div id="Clock">
@@ -47,4 +46,4 @@ function Clock(props) {
   );
 }
 
-export default Clock
+export default Clock;

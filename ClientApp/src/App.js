@@ -1,17 +1,17 @@
-import Clock from './components/Clock.js'
-import SetClockProps from './components/SetClockProps.js'
-import ClockProps from './components/ClockProps.js'
-import './components/App.css'
-import { useState } from 'react'
+import Clock from "./components/clock/Clock.js";
+import SetClockProps from "./components/clock/props/SetClockProps.js";
+import ClockProps from "./components/clock/props/ClockProps.js";
+import "./components/App.css";
+import { useState } from "react";
 
 function App() {
-  const [clockProps, setClockProps] = useState(new ClockProps())
+  const [clockProps, setClockProps] = useState(new ClockProps());
   return (
     <div className="App">
       <Clock clockProps={clockProps} />
       <SetClockProps setClockProps={setClockProps} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,66 +1,66 @@
-import { useState, useEffect } from 'react'
-import ClockProps from './ClockProps'
+import { useState, useEffect } from "react";
+import ClockProps from "./ClockProps";
 
 function SetClockProps(props) {
-  const clockProps = new ClockProps()
-  const [fontFamily, setFontFamily] = useState(clockProps.fontFamily)
-  const [fontColor, setFontColor] = useState(clockProps.fontColor)
-  const [blinkColons, setBlinkColons] = useState(clockProps.blinkColons)
-  const [presets, setPresets] = useState([])
-  const [loading, setLoading] = useState(true)
+  const clockProps = new ClockProps();
+  const [fontFamily, setFontFamily] = useState(clockProps.fontFamily);
+  const [fontColor, setFontColor] = useState(clockProps.fontColor);
+  const [blinkColons, setBlinkColons] = useState(clockProps.blinkColons);
+  const [presets, setPresets] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    ;(async () => {
-      const response = await fetch('clock/presets')
-      const data = await response.json()
-      setPresets(data)
-      setLoading(false)
-    })()
-  }, [])
+    (async () => {
+      const response = await fetch("clock/presets");
+      const data = await response.json();
+      setPresets(data);
+      setLoading(false);
+    })();
+  }, []);
 
   const getProps = () => {
-    const props = new ClockProps()
-    props.fontFamily = document.getElementById('fontFamily').value
-    props.titleFontSize = document.getElementById('titleFontSize').value
-    props.clockFontSize = document.getElementById('clockFontSize').value
-    props.fontColor = document.getElementById('fontColor').value
-    props.blinkColons = document.getElementById('blinkColons').checked
-    return props
-  }
+    const props = new ClockProps();
+    props.fontFamily = document.getElementById("fontFamily").value;
+    props.titleFontSize = document.getElementById("titleFontSize").value;
+    props.clockFontSize = document.getElementById("clockFontSize").value;
+    props.fontColor = document.getElementById("fontColor").value;
+    props.blinkColons = document.getElementById("blinkColons").checked;
+    return props;
+  };
 
   const setClockProps = () => {
-    const setProps = getProps()
-    props.setClockProps(setProps)
-  }
+    const setProps = getProps();
+    props.setClockProps(setProps);
+  };
 
   const fontSizeOptions = (selctedSize) => {
     return clockProps.availableFontSizes.map((size) => {
-      var option = <option>{size}</option>
+      var option = <option>{size}</option>;
       if (size === selctedSize) {
-        option = <option selected>{size}</option>
+        option = <option selected>{size}</option>;
       }
-      return option
-    })
-  }
+      return option;
+    });
+  };
 
   const setFontFamilyUI = () => {
-    setFontFamily(document.getElementById('fontFamily').value)
-    clockProps.fontFamily = document.getElementById('fontFamily').value
-  }
+    setFontFamily(document.getElementById("fontFamily").value);
+    clockProps.fontFamily = document.getElementById("fontFamily").value;
+  };
 
   const setFontColurUI = (e) => {
-    setFontColor(document.getElementById('fontColor').value)
-    clockProps.fontColor = document.getElementById('fontColor').value
-  }
+    setFontColor(document.getElementById("fontColor").value);
+    clockProps.fontColor = document.getElementById("fontColor").value;
+  };
 
   const setBlinkColonsUI = () => {
-    setBlinkColons(document.getElementById('blinkColons').checked)
-    clockProps.blinkColons = document.getElementById('blinkColons').checked
-    setClockProps()
-  }
+    setBlinkColons(document.getElementById("blinkColons").checked);
+    clockProps.blinkColons = document.getElementById("blinkColons").checked;
+    setClockProps();
+  };
 
   const presetsDisplay = (() => {
-    console.log(presets)
+    console.log(presets);
     return loading ? (
       <div>
         This is a good place to display and use the presets stored on the sever.
@@ -69,30 +69,30 @@ function SetClockProps(props) {
       <ul>
         {presets.map((p, i) => (
           <li>
-            Preset {i + 1}:{' '}
+            Preset {i + 1}:{" "}
             {`Font: ${p.fontFamily}, Color: ${p.fontColor}, Title Size: ${p.titleFontSize}, Clock Size: ${p.clockFontSize}`}
           </li>
         ))}
       </ul>
-    )
-  })()
+    );
+  })();
 
   return (
-    <div id="ClockProps" style={{ overflow: 'auto' }}>
+    <div id="ClockProps" style={{ overflow: "auto" }}>
       <div
         style={{
-          float: 'left',
-          width: '40px',
-          height: '100%',
-          border: '1px solid white',
-          fontSize: '20pt',
+          float: "left",
+          width: "40px",
+          height: "100%",
+          border: "1px solid white",
+          fontSize: "20pt",
         }}
       >
         <a
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: "pointer" }}
           onClick={() =>
             alert(
-              'This the button that would expand or collapse the settings panel.'
+              "This the button that would expand or collapse the settings panel."
             )
           }
         >
@@ -161,7 +161,7 @@ function SetClockProps(props) {
             <div>
               <button
                 onClick={() =>
-                  alert('This should save the preset to the sever.')
+                  alert("This should save the preset to the sever.")
                 }
               >
                 Save Preset
@@ -176,7 +176,7 @@ function SetClockProps(props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default SetClockProps
+export default SetClockProps;
