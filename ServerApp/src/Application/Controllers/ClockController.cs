@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using time.WebApi.Models.Dtos;
+using time.Application.Models.Dtos;
 
-namespace time.WebApi.Controllers;
+namespace time.Application.Controllers;
 
 [ApiController]
 [Route("[controller]")]

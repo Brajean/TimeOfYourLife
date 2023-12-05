@@ -1,4 +1,4 @@
-namespace time.WebApi.Models.Dtos;
+namespace time.Application.Models.Dtos;
 
 public class ClockPropsDto
 {
