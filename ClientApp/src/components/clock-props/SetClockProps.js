@@ -66,6 +66,10 @@ function SetClockProps(props) {
     setClockProps();
   };
 
+  const handleKeyEnter = (event) => {
+    if (event.key === "Enter") setClockProps();
+  };
+
   const presetsDisplay = (() => {
     console.log(presets);
     return loading ? (
@@ -122,6 +126,7 @@ function SetClockProps(props) {
                 id="titleHeader"
                 value={titleHeader}
                 onChange={setTitleHeaderUI}
+                onKeyDown={handleKeyEnter}
               />
               <button onClick={setClockProps}>✓</button>
             </div>
