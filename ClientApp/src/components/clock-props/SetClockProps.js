@@ -32,7 +32,13 @@ function SetClockProps(props) {
 
   const setClockProps = () => {
     const setProps = getProps();
-    props.setClockProps(setProps);
+    if (!setProps.titleHeader || !setProps.fontFamily || !setProps.fontColor) {
+      window.alert(
+        "Invalid fields! \nPlease check that the fields are not blank or null"
+      );
+    } else {
+      props.setClockProps(setProps);
+    }
   };
 
   const fontSizeOptions = (selctedSize) => {
