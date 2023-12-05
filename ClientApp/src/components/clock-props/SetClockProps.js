@@ -257,6 +257,7 @@ function SetClockProps(props) {
               <div>
                 <input
                   id="titleFontColor"
+                  type="color"
                   value={titleFontColor}
                   onChange={(e) => setTitleFontColorUI(e)}
                   onKeyDown={handleKeyEnter}
@@ -269,6 +270,7 @@ function SetClockProps(props) {
               <div>
                 <input
                   id="clockFontColor"
+                  type="color"
                   value={clockFontColor}
                   onChange={(e) => setClockFontColorUI(e)}
                   onKeyDown={handleKeyEnter}
@@ -281,8 +283,8 @@ function SetClockProps(props) {
               <div>
                 <input
                   id="blinkColons"
-                  checked={blinkColons}
                   type="checkbox"
+                  checked={blinkColons}
                   onChange={setBlinkColonsUI}
                 />
               </div>
