@@ -41,6 +41,20 @@ function SetClockProps(props) {
     }
   };
 
+  const savePreset = async () => {
+    const response = await fetch("clock/presets", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(getProps()),
+    });
+
+    const newPreset = await response.json();
+    setPresets([...presets, newPreset]);
+  };
+
   const fontSizeOptions = (selctedSize) => {
     return clockProps.availableFontSizes.map((size) => {
       var option = <option>{size}</option>;
@@ -188,13 +202,7 @@ function SetClockProps(props) {
           </div>
           <div>
             <div>
-              <button
-                onClick={() =>
-                  alert("This should save the preset to the sever.")
-                }
-              >
-                Save Preset
-              </button>
+              <button onClick={savePreset}>Save Preset</button>
             </div>
           </div>
         </div>
