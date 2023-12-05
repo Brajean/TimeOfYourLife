@@ -6,10 +6,16 @@ import { useState } from "react";
 
 function App() {
   const [clockProps, setClockProps] = useState(new ClockProps());
+  const [isExpanded, setIsExpanded] = useState(true);
+
   return (
     <div className="App">
-      <Clock clockProps={clockProps} />
-      <SetClockProps setClockProps={setClockProps} />
+      <Clock clockProps={clockProps} isExpanded={isExpanded} />
+      <SetClockProps
+        setClockProps={setClockProps}
+        isExpanded={isExpanded}
+        setIsExpanded={setIsExpanded}
+      />
     </div>
   );
 }

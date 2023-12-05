@@ -1,4 +1,10 @@
 import { useState, useEffect } from "react";
+import {
+  clockContainerStyle,
+  displayStyle,
+  titleStyle,
+  clockStyle,
+} from "./styles";
 
 function Clock(props) {
   const [date, setDate] = useState(new Date());
@@ -19,26 +25,13 @@ function Clock(props) {
     displayText = displayText.replace(/:/g, " ");
   }
 
-  let displayStyle = {
-    fontFamily: props.clockProps.fontFamily,
-    color: props.clockProps.fontColor,
-  };
-
-  let titleStyle = {
-    fontSize: `${props.clockProps.titleFontSize}pt`,
-  };
-
-  let clockStyle = {
-    fontSize: `${props.clockProps.clockFontSize}pt`,
-  };
-
   return (
-    <div id="Clock">
-      <div id="Digits" style={displayStyle}>
-        <div id="title" style={titleStyle}>
+    <div id="Clock" style={clockContainerStyle(props)}>
+      <div id="Digits" style={displayStyle(props)}>
+        <div id="title" style={titleStyle(props)}>
           {props.clockProps.titleHeader}
         </div>
-        <div id="time" style={clockStyle}>
+        <div id="time" style={clockStyle(props)}>
           {displayText}
         </div>
       </div>

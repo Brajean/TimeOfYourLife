@@ -109,7 +109,10 @@ function SetClockProps(props) {
   })();
 
   return (
-    <div id="ClockProps" style={{ overflow: "auto" }}>
+    <div
+      id="ClockProps"
+      style={{ overflow: "auto", width: props.isExpanded ? "40%" : "2%" }}
+    >
       <div
         style={{
           float: "left",
@@ -121,97 +124,95 @@ function SetClockProps(props) {
       >
         <a
           style={{ cursor: "pointer" }}
-          onClick={() =>
-            alert(
-              "This the button that would expand or collapse the settings panel."
-            )
-          }
+          onClick={() => props.setIsExpanded(!props.isExpanded)}
         >
           +/-
         </a>
       </div>
-      <div>
+      {props.isExpanded && (
         <div>
-          <h1>Clock Properties</h1>
+          <div>
+            <h1>Clock Properties</h1>
+            <hr />
+          </div>
+          <div>
+            <div>
+              <h2>Settings</h2>
+            </div>
+            <div>
+              <div>Title</div>
+              <div>
+                <input
+                  id="titleHeader"
+                  value={titleHeader}
+                  onChange={setTitleHeaderUI}
+                  onKeyDown={handleKeyEnter}
+                />
+                <button onClick={setClockProps}>✓</button>
+              </div>
+            </div>
+            <div>
+              <div>Font Family</div>
+              <div>
+                <input
+                  id="fontFamily"
+                  value={fontFamily}
+                  onChange={setFontFamilyUI}
+                />
+                <button onClick={setClockProps}>✓</button>
+              </div>
+            </div>
+            <div>
+              <div>Title Font Size</div>
+              <div>
+                <select id="titleFontSize" onChange={setClockProps}>
+                  {fontSizeOptions(clockProps.titleFontSize)}
+                </select>
+              </div>
+            </div>
+            <div>
+              <div>Clock Font Size</div>
+              <div>
+                <select id="clockFontSize" onChange={setClockProps}>
+                  {fontSizeOptions(clockProps.clockFontSize)}
+                </select>
+              </div>
+            </div>
+            <div>
+              <div>Font Color</div>
+              <div>
+                <input
+                  id="fontColor"
+                  value={fontColor}
+                  onChange={(e) => setFontColurUI(e)}
+                />
+                <button onClick={setClockProps}>✓</button>
+              </div>
+            </div>
+            <div>
+              <div>Blink Colons</div>
+              <div>
+                <input
+                  id="blinkColons"
+                  checked={blinkColons}
+                  type="checkbox"
+                  onChange={setBlinkColonsUI}
+                />
+              </div>
+            </div>
+            <div>
+              <div>
+                <button onClick={savePreset}>Save Preset</button>
+              </div>
+            </div>
+          </div>
           <hr />
-        </div>
-        <div>
           <div>
-            <h2>Settings</h2>
-          </div>
-          <div>
-            <div>Title</div>
-            <div>
-              <input
-                id="titleHeader"
-                value={titleHeader}
-                onChange={setTitleHeaderUI}
-                onKeyDown={handleKeyEnter}
-              />
-              <button onClick={setClockProps}>✓</button>
-            </div>
-          </div>
-          <div>
-            <div>Font Family</div>
-            <div>
-              <input
-                id="fontFamily"
-                value={fontFamily}
-                onChange={setFontFamilyUI}
-              />
-              <button onClick={setClockProps}>✓</button>
-            </div>
-          </div>
-          <div>
-            <div>Title Font Size</div>
-            <div>
-              <select id="titleFontSize" onChange={setClockProps}>
-                {fontSizeOptions(clockProps.titleFontSize)}
-              </select>
-            </div>
-          </div>
-          <div>
-            <div>Clock Font Size</div>
-            <div>
-              <select id="clockFontSize" onChange={setClockProps}>
-                {fontSizeOptions(clockProps.clockFontSize)}
-              </select>
-            </div>
-          </div>
-          <div>
-            <div>Font Color</div>
-            <div>
-              <input
-                id="fontColor"
-                value={fontColor}
-                onChange={(e) => setFontColurUI(e)}
-              />
-              <button onClick={setClockProps}>✓</button>
-            </div>
-          </div>
-          <div>
-            <div>Blink Colons</div>
-            <div>
-              <input
-                id="blinkColons"
-                checked={blinkColons}
-                type="checkbox"
-                onChange={setBlinkColonsUI}
-              />
-            </div>
-          </div>
-          <div>
-            <div>
-              <button onClick={savePreset}>Save Preset</button>
-            </div>
+            <h2>Presets</h2>
+            <div>{presetsDisplay}</div>
           </div>
         </div>
-        <hr />
-        <div>
-          <h2>Presets</h2>
-          <div>{presetsDisplay}</div>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
