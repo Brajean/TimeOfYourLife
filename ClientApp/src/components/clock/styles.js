@@ -5,14 +5,19 @@ export const clockContainerStyle = (props) => {
 export const displayStyle = (props) => {
   return {
     fontFamily: props.clockProps.fontFamily,
-    color: props.clockProps.fontColor,
   };
 };
 
 export const titleStyle = (props) => {
-  return { fontSize: `${props.clockProps.titleFontSize}pt` };
+  return {
+    fontSize: `${props.clockProps.titleFontSize}pt`,
+    color: props.clockProps.titleFontColor,
+  };
 };
 
 export const clockStyle = (props) => {
-  return { fontSize: `${props.clockProps.clockFontSize}pt` };
+  return {
+    fontSize: `${props.clockProps.clockFontSize}pt`,
+    color: props.clockProps.clockFontColor,
+  };
 };

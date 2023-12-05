@@ -4,7 +4,12 @@ import ClockProps from "./ClockProps";
 function SetClockProps(props) {
   const clockProps = new ClockProps();
   const [fontFamily, setFontFamily] = useState(clockProps.fontFamily);
-  const [fontColor, setFontColor] = useState(clockProps.fontColor);
+  const [titleFontColor, setTitleFontColor] = useState(
+    clockProps.titleFontColor
+  );
+  const [clockFontColor, setClockFontColor] = useState(
+    clockProps.clockFontColor
+  );
   const [blinkColons, setBlinkColons] = useState(clockProps.blinkColons);
   const [presets, setPresets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,7 +29,8 @@ function SetClockProps(props) {
     props.fontFamily = document.getElementById("fontFamily").value;
     props.titleFontSize = document.getElementById("titleFontSize").value;
     props.clockFontSize = document.getElementById("clockFontSize").value;
-    props.fontColor = document.getElementById("fontColor").value;
+    props.titleFontColor = document.getElementById("titleFontColor").value;
+    props.clockFontColor = document.getElementById("clockFontColor").value;
     props.blinkColons = document.getElementById("blinkColons").checked;
     props.titleHeader = document.getElementById("titleHeader").value;
     return props;
@@ -32,7 +38,12 @@ function SetClockProps(props) {
 
   const setClockProps = () => {
     const setProps = getProps();
-    if (!setProps.titleHeader || !setProps.fontFamily || !setProps.fontColor) {
+    if (
+      !setProps.titleHeader ||
+      !setProps.fontFamily ||
+      !setProps.titleFontColor ||
+      !setProps.clockFontColor
+    ) {
       window.alert(
         "Invalid fields! \nPlease check that the fields are not blank or null"
       );
@@ -79,9 +90,14 @@ function SetClockProps(props) {
     clockProps.fontFamily = document.getElementById("fontFamily").value;
   };
 
-  const setFontColurUI = (e) => {
-    setFontColor(document.getElementById("fontColor").value);
-    clockProps.fontColor = document.getElementById("fontColor").value;
+  const setTitleFontColorUI = (e) => {
+    setTitleFontColor(document.getElementById("titleFontColor").value);
+    clockProps.titleFontColor = document.getElementById("titleFontColor").value;
+  };
+
+  const setClockFontColorUI = (e) => {
+    setClockFontColor(document.getElementById("clockFontColor").value);
+    clockProps.clockFontColor = document.getElementById("clockFontColor").value;
   };
 
   const setBlinkColonsUI = () => {
@@ -105,7 +121,7 @@ function SetClockProps(props) {
         {presets.map((p, i) => (
           <li>
             Preset {i + 1}:{" "}
-            {`Font: ${p.fontFamily}, Color: ${p.fontColor}, Title Size: ${p.titleFontSize}, Clock Size: ${p.clockFontSize}`}
+            {`Font: ${p.fontFamily}, Title Color: ${p.titleFontColor}, Title Size: ${p.titleFontSize}, Clock Color: ${p.clockFontColor}, Clock Size: ${p.clockFontSize}`}
           </li>
         ))}
       </ul>
@@ -197,12 +213,23 @@ function SetClockProps(props) {
               </div>
             </div>
             <div>
-              <div>Font Color</div>
+              <div>Title Font Color</div>
               <div>
                 <input
-                  id="fontColor"
-                  value={fontColor}
-                  onChange={(e) => setFontColurUI(e)}
+                  id="titleFontColor"
+                  value={titleFontColor}
+                  onChange={(e) => setTitleFontColorUI(e)}
+                />
+                <button onClick={setClockProps}>✓</button>
+              </div>
+            </div>
+            <div>
+              <div>Clock Font Color</div>
+              <div>
+                <input
+                  id="clockFontColor"
+                  value={clockFontColor}
+                  onChange={(e) => setClockFontColorUI(e)}
                 />
                 <button onClick={setClockProps}>✓</button>
               </div>

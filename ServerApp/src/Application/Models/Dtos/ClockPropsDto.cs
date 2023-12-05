@@ -14,7 +14,9 @@ public class ClockPropsDto
   
   public bool BlinkColons {get; set;} = true;
   
-  public string FontColor {get; set;} = "black";
+  public string TitleFontColor {get; set;} = "black";
+
+  public string ClockFontColor {get; set;} = "black";
   
   public string TitleHeader { get; set; } = "The Time of Your Life";
 }
