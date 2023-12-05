@@ -1,14 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
+using time.WebApi.Models.Dtos;
 
-namespace time.Controllers;
+namespace time.WebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 public class ClockController : ControllerBase
 {
-    private static List<ClockProps> _presets = new List<ClockProps>(){ new() };
+    private static List<ClockPropsDto> _presets = new List<ClockPropsDto>(){ new() };
 
     private readonly ILogger<ClockController> _logger;
 
@@ -18,13 +17,13 @@ public class ClockController : ControllerBase
     }
 
     [HttpGet, Route("presets")]
-    public IEnumerable<ClockProps> GetPresets()
+    public IEnumerable<ClockPropsDto> GetPresets()
     {
         return _presets.ToArray();
     }
 
     [HttpPost("presets")]
-    public ClockProps AddPreset([FromBody]ClockProps preset)
+    public ClockPropsDto AddPreset([FromBody]ClockPropsDto preset)
     {
         _presets.Add(preset);
         return preset;
